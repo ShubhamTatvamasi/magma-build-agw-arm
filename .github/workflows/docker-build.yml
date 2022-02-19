@@ -30,8 +30,8 @@ jobs:
           platforms: linux/arm64
           context: magma/lte/gateway/docker/services/python
           build-args:
-            - CPU_ARCH: aarch64
-            - DEB_PORT: arm64
+            - CPU_ARCH=aarch64
+            - DEB_PORT=arm64
           push: true
           tags: shubhamtatvamasi/agw_gateway_python:latest
 
@@ -62,8 +62,8 @@ jobs:
           platforms: linux/arm64
           context: magma/lte/gateway/docker/services/c
           build-args:
-            - CPU_ARCH: aarch64
-            - DEB_PORT: arm64
+            - CPU_ARCH=aarch64
+            - DEB_PORT=arm64
           push: true
           tags: shubhamtatvamasi/agw_gateway_c:latest
 
