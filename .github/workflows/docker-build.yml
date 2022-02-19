@@ -18,16 +18,21 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Docker Build
+      - name: Test
         run: |
-          git clone https://github.com/m-govind/magma.git
-          cd magma/lte/gateway/docker/
-          docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64
+          docker buildx ls
 
-      - name: Docker Push
-        run: |
-          docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
-          docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
 
-          docker push shubhamtatvamasi/agw_gateway_python
-          docker push shubhamtatvamasi/agw_gateway_c
+      # - name: Docker Build
+      #   run: |
+      #     git clone https://github.com/m-govind/magma.git
+      #     cd magma/lte/gateway/docker/
+      #     docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64
+
+      # - name: Docker Push
+      #   run: |
+      #     docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
+      #     docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
+
+      #     docker push shubhamtatvamasi/agw_gateway_python
+      #     docker push shubhamtatvamasi/agw_gateway_c
