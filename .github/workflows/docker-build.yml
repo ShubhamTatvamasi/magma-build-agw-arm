@@ -31,8 +31,9 @@ jobs:
           context: magma/lte/gateway/docker/services/python
           push: true
           tags: shubhamtatvamasi/agw_gateway_python:latest
-          build-args: CPU_ARCH=aarch64
-          build-args: DEB_PORT=arm64
+          build-args: |
+            CPU_ARCH=aarch64
+            DEB_PORT=arm64
 
   docker-build-c:
     runs-on: ubuntu-latest
@@ -62,8 +63,9 @@ jobs:
           context: magma/lte/gateway/docker/services/c
           push: true
           tags: shubhamtatvamasi/agw_gateway_c:latest
-          build-args: CPU_ARCH=aarch64
-          build-args: DEB_PORT=arm64
+          build-args: |
+            CPU_ARCH=aarch64
+            DEB_PORT=arm64
 
       # - name: Test
       #   run: |
