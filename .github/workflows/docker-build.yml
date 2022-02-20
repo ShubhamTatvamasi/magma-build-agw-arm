@@ -22,8 +22,16 @@ jobs:
 
       - name: Docker build
         run: |
-          git clone https://github.com/TatvamasiLabs/magma.git --depth 1
+          # git clone https://github.com/TatvamasiLabs/magma.git --depth 1
+          git clone https://github.com/m-govind/magma.git --depth 1
           cd magma/lte/gateway/docker/
+
+          sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
+
+          # sed -i 's,https://artifactory.magmacore.org/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
+
+          # services/c/Dockerfile
+          # services/python/Dockerfile
 
           yq e '.services.gateway_c.platform = "linux/arm64/v8"' -i docker-compose.override.yaml
           yq e '.services.gateway_python.platform = "linux/arm64/v8"' -i docker-compose.override.yaml
