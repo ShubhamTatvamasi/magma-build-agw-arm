@@ -42,10 +42,6 @@ jobs:
           sed -i 's,FROM,FROM --platform=linux/arm64,g' services/c/Dockerfile
           sed -i 's,FROM,FROM --platform=linux/arm64,g' services/python/Dockerfile
 
-          # Add ARM Platform for building docker images
-          # yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
-          # yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
-
           # Build docker images
           docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64
 
