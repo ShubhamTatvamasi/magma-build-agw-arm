@@ -30,13 +30,25 @@ jobs:
           sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/ShubhamTatvamasi/magma-artifactory-gpg/master/public,g' c/Dockerfile
           sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/ShubhamTatvamasi/magma-artifactory-gpg/master/public,g' python/Dockerfile
 
+          # Update docker platform
+          sed -i 's,FROM,FROM --platform=linux/arm64,g' c/Dockerfile
+          sed -i 's,FROM,FROM --platform=linux/arm64,g' python/Dockerfile
+
+          # update CPU_ARCH
+          sed -i 's,x86_64,aarch64,g' c/Dockerfile
+          sed -i 's,x86_64,aarch64,g' python/Dockerfile
+
+          # update DEB_PORT
+          sed -i 's,amd64,arm64,g' c/Dockerfile
+          sed -i 's,amd64,arm64,g' python/Dockerfile
+
           cd ${MAGMA_ROOT}
 
-          docker buildx bake \
-            --set *.args.DEB_PORT=arm64 \
-            --set *.args.CPU_ARCH=aarch64 \
-            -f lte/gateway/docker/docker-compose.override.yaml
+          # yq e '.services.gateway_c.build.x-bake.platforms = "linux/arm64"' -i lte/gateway/docker/docker-compose.override.yaml
+          # yq e '.services.gateway_python.build.x-bake.platforms = "linux/arm64"' -i lte/gateway/docker/docker-compose.override.yaml
+          # cat lte/gateway/docker/docker-compose.override.yaml
 
+          docker buildx bake -f lte/gateway/docker/docker-compose.override.yaml
           docker images
 
       - name: Docker Push
