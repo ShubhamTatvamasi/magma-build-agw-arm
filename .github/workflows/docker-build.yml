@@ -49,11 +49,12 @@ jobs:
           sed -i 's,amd64,arm64,g' services/c/Dockerfile
           sed -i 's,amd64,arm64,g' services/python/Dockerfile
 
-          yq e '.services.gateway_c.platform = "linux/arm64/v8"' -i docker-compose.override.yaml
-          yq e '.services.gateway_python.platform = "linux/arm64/v8"' -i docker-compose.override.yaml
+          # yq e '.services.gateway_c.platform = "linux/arm64/v8"' -i docker-compose.override.yaml
+          # yq e '.services.gateway_python.platform = "linux/arm64/v8"' -i docker-compose.override.yaml
 
           # Build docker images
-          docker-compose build
+          docker buildx bake
+          # docker-compose build
 
       - name: Docker Push
         run: |
