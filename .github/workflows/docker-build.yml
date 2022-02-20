@@ -49,6 +49,9 @@ jobs:
           sed -i 's,amd64,arm64,g' services/c/Dockerfile
           sed -i 's,amd64,arm64,g' services/python/Dockerfile
 
+          # delete bazel build command
+          sed -i '118,125d' services/c/Dockerfile
+
           # Build docker images
           docker-compose build
 
