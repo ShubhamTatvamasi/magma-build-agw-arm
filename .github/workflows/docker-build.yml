@@ -22,7 +22,7 @@ jobs:
 
       - name: Docker build
         run: |
-          git clone https://github.com/m-govind/magma.git
+          git clone https://github.com/TatvamasiLabs/magma.git
           cd magma/lte/gateway/docker/
 
           yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
