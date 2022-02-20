@@ -66,7 +66,7 @@ jobs:
         with:
           platforms: linux/arm64
           push: true
-          context: lte/gateway/docker/services/c/Dockerfile
+          context: lte/gateway/docker/services/c/
           tags: shubhamtatvamasi/agw_gateway_c
 
 
