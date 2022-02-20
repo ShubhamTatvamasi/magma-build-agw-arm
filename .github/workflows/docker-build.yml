@@ -11,8 +11,8 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-        with:
-          install: true
+        # with:
+        #   install: true
 
       - name: Login to DockerHub
         uses: docker/login-action@v1 
@@ -56,7 +56,8 @@ jobs:
 
           # Build docker images
           # docker buildx bake
-          docker-compose build
+          docker buildx bake -f docker-compose.override.yaml
+          # docker-compose build
 
       - name: Docker Push
         run: |
