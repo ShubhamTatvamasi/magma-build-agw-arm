@@ -50,8 +50,8 @@ jobs:
 
       - name: Docker Push
         run: |
-          docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
-          docker push shubhamtatvamasi/agw_gateway_c
+          # docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
+          # docker push shubhamtatvamasi/agw_gateway_c
 
           docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
           docker push shubhamtatvamasi/agw_gateway_python
