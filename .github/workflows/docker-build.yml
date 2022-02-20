@@ -43,9 +43,9 @@ jobs:
           cd magma/lte/gateway/docker/
 
           # Update artifactory gpg public key URL
-          sed -i 's,https://artifactory.magmacore.org/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/ShubhamTatvamasi/magma-artifactory-gpg/master/public,g' services/c/Dockerfile
-          sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/ShubhamTatvamasi/magma-artifactory-gpg/master/public,g' services/c/Dockerfile
-          sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/ShubhamTatvamasi/magma-artifactory-gpg/master/public,g' services/python/Dockerfile
+          # sed -i 's,https://artifactory.magmacore.org/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/ShubhamTatvamasi/magma-artifactory-gpg/master/public,g' services/c/Dockerfile
+          # sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/ShubhamTatvamasi/magma-artifactory-gpg/master/public,g' services/c/Dockerfile
+          # sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/ShubhamTatvamasi/magma-artifactory-gpg/master/public,g' services/python/Dockerfile
 
           # Update docker platform
           sed -i 's,FROM,FROM --platform=linux/arm64,g' services/c/Dockerfile
