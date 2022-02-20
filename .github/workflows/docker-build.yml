@@ -25,17 +25,17 @@ jobs:
           git clone https://github.com/TatvamasiLabs/magma.git
           cd magma/lte/gateway/docker/
 
-          # yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
-          # yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
+          yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
+          yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
 
-          # docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64
+          docker-compose build sctpd --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64
 
-          docker-compose build
+          # docker-compose build
 
       - name: Docker Push
         run: |
-          docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
+          # docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
           docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
 
-          docker push shubhamtatvamasi/agw_gateway_python
+          # docker push shubhamtatvamasi/agw_gateway_python
           docker push shubhamtatvamasi/agw_gateway_c
