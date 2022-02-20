@@ -35,8 +35,8 @@ jobs:
           yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
           yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
 
-          mv docker-compose.yaml docker-compose.yaml.bak
-          mv docker-compose.override.yaml docker-compose.yaml
+          # mv docker-compose.yaml docker-compose.yaml.bak
+          # mv docker-compose.override.yaml docker-compose.yaml
 
           docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64 gateway_c
 
