@@ -49,10 +49,10 @@ jobs:
           sed -i 's,amd64,arm64,g' services/c/Dockerfile
           sed -i 's,amd64,arm64,g' services/python/Dockerfile
 
-          sudo apt install qemu binfmt-support qemu-user-static -y
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          # sudo apt install qemu binfmt-support qemu-user-static -y
+          # docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
-          docker run --rm arm64v8/ubuntu uname -m
+          docker run --platform=linux/arm64 --rm arm64v8/ubuntu uname -m
 
           # Build docker images
           docker-compose build
