@@ -25,8 +25,8 @@ jobs:
           git clone https://github.com/TatvamasiLabs/magma.git --depth 1
           cd magma/lte/gateway/docker/
 
-          yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
-          yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
+          yq e '.services.gateway_c.platform = "linux/arm64/v8"' -i docker-compose.override.yaml
+          yq e '.services.gateway_python.platform = "linux/arm64/v8"' -i docker-compose.override.yaml
 
           export DOCKER_BUILDKIT=1
 
