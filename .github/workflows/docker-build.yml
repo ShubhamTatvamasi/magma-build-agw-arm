@@ -22,22 +22,21 @@ jobs:
 
       - name: Docker build
         run: |
-          # git clone https://github.com/TatvamasiLabs/magma.git --depth 1
+          # Clone magma repo with ARM AGW Dockerfile
           git clone https://github.com/m-govind/magma.git --depth 1
           cd magma/lte/gateway/docker/
 
-          # Update gpg key URL
+          # Update artifactory gpg public key URL
           sed -i 's,https://artifactory.magmacore.org/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
           sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
           sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/python/Dockerfile
 
-          # Add ARM Platform
+          # Add ARM Platform for building docker images
           yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
           yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
 
+          # Build docker images
           docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64 gateway_c
-
-          # docker-compose build
 
       - name: Docker Push
         run: |
