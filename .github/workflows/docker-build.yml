@@ -29,6 +29,7 @@ jobs:
         run: |
           # Clone magma repo with ARM AGW Dockerfile
           git clone https://github.com/m-govind/magma.git
+          export WORKER_ROOT=${PWD}
           export MAGMA_ROOT=${PWD}/magma
           cd ${MAGMA_ROOT}/lte/gateway/docker/
 
@@ -50,15 +51,28 @@ jobs:
           sed -i 's,amd64,arm64,g' services/python/Dockerfile
 
           # delete bazel build command
-          sed -i '118,125d' services/c/Dockerfile
+          # sed -i '118,125d' services/c/Dockerfile
 
           # Build docker images
-          docker-compose build
+          # docker-compose build
 
-      - name: Docker Push
-        run: |
-          docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
-          docker push shubhamtatvamasi/agw_gateway_c
+          cd ${WORKER_ROOT}
+          cp ${MAGMA_ROOT}/lte/gateway/docker/services/c/Dockerfile .
+          mv ${MAGMA_ROOT}/* .
 
-          docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
-          docker push shubhamtatvamasi/agw_gateway_python
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          platforms: linux/arm64
+          push: true
+          tags: shubhamtatvamasi/agw_gateway_c
+
+
+      # - name: Docker Push
+      #   run: |
+      #     docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
+      #     docker push shubhamtatvamasi/agw_gateway_c
+
+      #     docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
+      #     docker push shubhamtatvamasi/agw_gateway_python
