@@ -41,9 +41,7 @@ jobs:
 
           yq e '.services.gateway_python.build.x-bake.tags = "shubhamtatvamasi/agw_gateway_python"' -i lte/gateway/docker/docker-compose.override.yaml
 
-          docker buildx bake --push --print -f lte/gateway/docker/docker-compose.override.yaml gateway_python
-
-          docker images
+          docker buildx bake --push -f lte/gateway/docker/docker-compose.override.yaml gateway_python
 
   docker-build-c:
     runs-on: ubuntu-latest
@@ -84,7 +82,4 @@ jobs:
 
           yq e '.services.gateway_c.build.x-bake.tags = "shubhamtatvamasi/agw_gateway_c"' -i lte/gateway/docker/docker-compose.override.yaml
 
-          docker buildx bake --push --print -f lte/gateway/docker/docker-compose.override.yaml gateway_c
-
-          docker images
-
+          docker buildx bake --push -f lte/gateway/docker/docker-compose.override.yaml gateway_c
