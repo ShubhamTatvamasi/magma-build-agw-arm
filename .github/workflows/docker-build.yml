@@ -44,17 +44,9 @@ jobs:
 
           cd ${MAGMA_ROOT}
 
-          yq e '.services.gateway_python.platform = "linux/arm64"' -i lte/gateway/docker/docker-compose.override.yaml
           yq e '.services.gateway_python.build.x-bake.tags = "shubhamtatvamasi/agw_gateway_python"' -i lte/gateway/docker/docker-compose.override.yaml
 
           docker buildx bake --push -f lte/gateway/docker/docker-compose.override.yaml gateway_python
 
           docker images
 
-      # - name: Docker Push
-      #   run: |
-      #     # docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
-      #     # docker push shubhamtatvamasi/agw_gateway_c
-
-      #     docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
-      #     docker push shubhamtatvamasi/agw_gateway_python
