@@ -3,7 +3,7 @@ name: docker build
 on: [push]
 
 jobs:
-  docker-build-python:
+  docker-agw-gateway-python:
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
@@ -43,7 +43,7 @@ jobs:
 
           docker buildx bake --push -f lte/gateway/docker/docker-compose.override.yaml gateway_python
 
-  docker-build-c:
+  docker-agw-gateway-c:
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
