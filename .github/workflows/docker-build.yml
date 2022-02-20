@@ -20,6 +20,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      - name: Update Google DNS
+        run: |
+          sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+          sudo echo "nameserver 8.8.4.4" >> /etc/resolv.conf
+
       - name: install latest docker-compose
         run: |
           export LATEST_VERSION=$(curl -s https://github.com/docker/compose/releases/latest | grep -o "v[0-9]\.[0-9]*\.[0-9]*")
