@@ -55,21 +55,6 @@ jobs:
           # Build docker images
           docker-compose build
 
-          # cd ${WORKER_ROOT}
-          # mv ${MAGMA_ROOT}/* .
-          # ls 
-          # ls lte/gateway/docker/services/c/Dockerfile
-
-      # - name: Build and push
-      #   id: docker_build
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     platforms: linux/arm64
-      #     push: true
-      #     context: lte/gateway/docker/services/c/
-      #     tags: shubhamtatvamasi/agw_gateway_c
-
-
       - name: Docker Push
         run: |
           docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
