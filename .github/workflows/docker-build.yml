@@ -47,6 +47,10 @@ jobs:
           sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/ShubhamTatvamasi/magma-artifactory-gpg/master/public,g' services/c/Dockerfile
           sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/ShubhamTatvamasi/magma-artifactory-gpg/master/public,g' services/python/Dockerfile
 
+          # Update docker platform
+          sed -i 's,FROM,FROM --platform=linux/arm64,g' services/c/Dockerfile
+          sed -i 's,FROM,FROM --platform=linux/arm64,g' services/python/Dockerfile
+
           # Add ARM Platform for building docker images
           yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
           yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
