@@ -26,16 +26,14 @@ jobs:
           git clone https://github.com/m-govind/magma.git --depth 1
           cd magma/lte/gateway/docker/
 
-          sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
+          # Update gpg key URL
           sed -i 's,https://artifactory.magmacore.org/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
+          sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
+          sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/python/Dockerfile
 
-          # services/c/Dockerfile
-          # services/python/Dockerfile
-
-          yq e '.services.gateway_c.platform = "linux/arm64/v8"' -i docker-compose.override.yaml
-          yq e '.services.gateway_python.platform = "linux/arm64/v8"' -i docker-compose.override.yaml
-
-          export DOCKER_BUILDKIT=1
+          # Add ARM Platform
+          yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
+          yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
 
           mv docker-compose.yaml docker-compose.yaml.bak
           mv docker-compose.override.yaml docker-compose.yaml
