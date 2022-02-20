@@ -22,8 +22,8 @@ jobs:
 
       - name: Docker build
         run: |
-          export COMPOSE_DOCKER_CLI_BUILD=1
-          export DOCKER_BUILDKIT=1
+          # export COMPOSE_DOCKER_CLI_BUILD=1
+          # export DOCKER_BUILDKIT=1
 
           git clone https://github.com/m-govind/magma.git
           cd magma/lte/gateway/docker/
