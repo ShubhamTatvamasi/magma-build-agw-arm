@@ -57,6 +57,7 @@ jobs:
 
       - name: Build and push
         id: docker_build
+        working-directory: magma
         uses: docker/build-push-action@v2
         with:
           platforms: linux/arm64
