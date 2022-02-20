@@ -56,8 +56,10 @@ jobs:
 
           # Build docker images
           # docker buildx bake
-          docker buildx bake -f docker-compose.override.yaml
           # docker-compose build
+
+          cd ${MAGMA_ROOT}
+          docker buildx bake -f lte/gateway/docker/docker-compose.override.yaml
 
       - name: Docker Push
         run: |
