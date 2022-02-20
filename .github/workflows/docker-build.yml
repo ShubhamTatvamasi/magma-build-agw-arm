@@ -87,16 +87,16 @@ jobs:
       #       CPU_ARCH=aarch64
       #       DEB_PORT=arm64
 
-      - name: Test
-        run: |
-          export COMPOSE_DOCKER_CLI_BUILD=1
-          export DOCKER_BUILDKIT=1
-          docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64
+      # - name: Test
+      #   run: |
+      #     export COMPOSE_DOCKER_CLI_BUILD=1
+      #     export DOCKER_BUILDKIT=1
+      #     docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64
 
-      - name: Docker Push
-        run: |
-          docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
-          docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
+      # - name: Docker Push
+      #   run: |
+      #     docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
+      #     docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
 
-          docker push shubhamtatvamasi/agw_gateway_python
-          docker push shubhamtatvamasi/agw_gateway_c
+      #     docker push shubhamtatvamasi/agw_gateway_python
+      #     docker push shubhamtatvamasi/agw_gateway_c
