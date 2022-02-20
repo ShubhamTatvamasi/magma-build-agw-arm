@@ -44,7 +44,7 @@ jobs:
 
           cd ${MAGMA_ROOT}
 
-          docker buildx bake -f lte/gateway/docker/docker-compose.override.yaml gateway_python
+          docker buildx bake --load -f lte/gateway/docker/docker-compose.override.yaml gateway_python
 
           docker images
 
