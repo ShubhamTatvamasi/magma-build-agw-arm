@@ -56,12 +56,12 @@ jobs:
           # yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
 
           # Build docker images
-          docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64 gateway_python
+          docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64 gateway_c
 
       - name: Docker Push
         run: |
-          # docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
-          # docker push shubhamtatvamasi/agw_gateway_c
+          docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
+          docker push shubhamtatvamasi/agw_gateway_c
 
-          docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
-          docker push shubhamtatvamasi/agw_gateway_python
+          # docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
+          # docker push shubhamtatvamasi/agw_gateway_python
