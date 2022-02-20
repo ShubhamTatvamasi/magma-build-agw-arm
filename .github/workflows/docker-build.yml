@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: docker-compose install
+      - name: install latest docker-compose
         run: |
           export LATEST_VERSION=$(curl -s https://github.com/docker/compose/releases/latest | grep -o "v[0-9]\.[0-9]*\.[0-9]*")
           sudo curl -L "https://github.com/docker/compose/releases/download/$LATEST_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -34,21 +34,21 @@ jobs:
           cd magma/lte/gateway/docker/
 
           # Update artifactory gpg public key URL
-          sed -i 's,https://artifactory.magmacore.org/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
-          sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
-          sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/python/Dockerfile
+          # sed -i 's,https://artifactory.magmacore.org/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
+          # sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/c/Dockerfile
+          # sed -i 's,https://artifactory.magmacore.org:443/artifactory/api/gpg/key/public,https://raw.githubusercontent.com/TatvamasiLabs/gpg/main/public,g' services/python/Dockerfile
 
           # Add ARM Platform for building docker images
           yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
           yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
 
           # Build docker images
-          docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64 gateway_python
+          docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64
 
       - name: Docker Push
         run: |
-          # docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
-          # docker push shubhamtatvamasi/agw_gateway_c
+          docker tag agw_gateway_c shubhamtatvamasi/agw_gateway_c
+          docker push shubhamtatvamasi/agw_gateway_c
 
           docker tag agw_gateway_python shubhamtatvamasi/agw_gateway_python
           docker push shubhamtatvamasi/agw_gateway_python
