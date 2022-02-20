@@ -44,8 +44,8 @@ jobs:
 
           cd ${MAGMA_ROOT}
 
-          yq e '.services.gateway_c.build.x-bake.platforms[0] = "linux/arm64"' -i lte/gateway/docker/docker-compose.override.yaml
-          yq e '.services.gateway_python.build.x-bake.platforms[0] = "linux/arm64"' -i lte/gateway/docker/docker-compose.override.yaml
+          yq e '.services.gateway_c.build.x-bake.platforms = "linux/arm64"' -i lte/gateway/docker/docker-compose.override.yaml
+          yq e '.services.gateway_python.build.x-bake.platforms = "linux/arm64"' -i lte/gateway/docker/docker-compose.override.yaml
           cat lte/gateway/docker/docker-compose.override.yaml
 
           docker buildx bake -f lte/gateway/docker/docker-compose.override.yaml
