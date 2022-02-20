@@ -42,8 +42,15 @@ jobs:
           sed -i 's,FROM,FROM --platform=linux/arm64,g' services/c/Dockerfile
           sed -i 's,FROM,FROM --platform=linux/arm64,g' services/python/Dockerfile
 
+          # update CPU_ARCH and DEB_PORT
+          sed -i 's,x86_64,aarch64,g' services/c/Dockerfile
+          sed -i 's,amd64,arm64,g' services/c/Dockerfile
+
+          sed -i 's,x86_64,aarch64,g' services/python/Dockerfile
+          sed -i 's,amd64,arm64,g' services/python/Dockerfile
+
           # Build docker images
-          docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64
+          docker-compose build
 
       - name: Docker Push
         run: |
