@@ -29,7 +29,9 @@ jobs:
 
       - name: Docker build
         run: |
+          export WORKER_ROOT=${PWD}
           export MAGMA_ROOT=${PWD}/magma
+
           # Clone magma repo with ARM AGW Dockerfile
           git clone https://github.com/m-govind/magma.git --depth 1
           cd ${MAGMA_ROOT}/lte/gateway/docker/
@@ -53,7 +55,8 @@ jobs:
           # Build docker images
           # docker-compose build
 
-          cd ${MAGMA_ROOT}
+          cd ${WORKER_ROOT}
+          mv ${MAGMA_ROOT}/* .
 
       - name: Build and push
         id: docker_build
