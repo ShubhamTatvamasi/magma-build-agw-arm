@@ -22,13 +22,13 @@ jobs:
 
       - name: Docker build
         run: |
-          git clone https://github.com/TatvamasiLabs/magma.git
+          git clone https://github.com/TatvamasiLabs/magma.git --depth 1
           cd magma/lte/gateway/docker/
 
           yq e '.services.gateway_c.platform = "linux/arm64"' -i docker-compose.override.yaml
           yq e '.services.gateway_python.platform = "linux/arm64"' -i docker-compose.override.yaml
 
-          docker-compose build sctpd --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64
+          docker-compose build --build-arg CPU_ARCH=aarch64 --build-arg DEB_PORT=arm64 sctpd
 
           # docker-compose build
 
