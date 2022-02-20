@@ -59,6 +59,7 @@ jobs:
           cd ${WORKER_ROOT}
           cp ${MAGMA_ROOT}/lte/gateway/docker/services/c/Dockerfile .
           mv ${MAGMA_ROOT}/* .
+          ls
 
       - name: Build and push
         id: docker_build
