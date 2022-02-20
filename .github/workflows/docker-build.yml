@@ -37,3 +37,4 @@ jobs:
 
           docker push shubhamtatvamasi/agw_gateway_python
           docker push shubhamtatvamasi/agw_gateway_c
+
