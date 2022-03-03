@@ -21,7 +21,8 @@ jobs:
       - name: Docker build and push
         run: |
           # Clone magma repo with ARM AGW Dockerfile
-          git clone https://github.com/m-govind/magma.git --depth 1
+          # git clone https://github.com/m-govind/magma.git --depth 1
+          git clone -b arm-agw-docker-build-fix https://github.com/ShubhamTatvamasi/magma.git --depth 1
           export MAGMA_ROOT=${PWD}/magma
           cd ${MAGMA_ROOT}/lte/gateway/docker/services/
 
@@ -61,7 +62,8 @@ jobs:
       - name: Docker build and push
         run: |
           # Clone magma repo with ARM AGW Dockerfile
-          git clone https://github.com/m-govind/magma.git --depth 1
+          # git clone https://github.com/m-govind/magma.git --depth 1
+          git clone -b arm-agw-docker-build-fix https://github.com/ShubhamTatvamasi/magma.git --depth 1
           export MAGMA_ROOT=${PWD}/magma
           cd ${MAGMA_ROOT}/lte/gateway/docker/services/
 
